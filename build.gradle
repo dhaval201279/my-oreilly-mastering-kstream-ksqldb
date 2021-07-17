@@ -1,0 +1,44 @@
+plugins {
+	id 'java'
+	id 'application'
+}
+
+group = 'com.its'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '1.8'
+
+configurations {
+	compileOnly {
+		extendsFrom annotationProcessor
+	}
+}
+
+repositories {
+	mavenCentral()
+	jcenter()
+}
+
+dependencies {
+	implementation 'org.apache.kafka:kafka-streams:2.7.0'
+
+	compileOnly 'org.projectlombok:lombok:1.14.8'
+	annotationProcessor 'org.projectlombok:lombok:1.14.8'
+
+	testCompileOnly 'org.projectlombok:lombok:1.14.8'
+	testAnnotationProcessor 'org.projectlombok:lombok:1.14.8'
+}
+
+application {
+	// Define the main class for the application.
+	mainClassName = 'com.its.oreillymasteringkstreamksqldb.chapter2.DslExample'
+}
+
+task runDSL(type: JavaExec) {
+	main = 'com.its.oreillymasteringkstreamksqldb.chapter2.DslExample'
+	classpath sourceSets.main.runtimeClasspath
+}
+
+task runProcessorAPI(type: JavaExec) {
+	main = 'com.its.oreillymasteringkstreamksqldb.chapter2.ProcessorApiExample'
+	classpath sourceSets.main.runtimeClasspath
+}
